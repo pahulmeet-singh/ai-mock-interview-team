@@ -14,13 +14,16 @@ const authRoutes = [
 ];
 
 const appRoutes = [
+  { index: true, lazy: () => import('@/features/feedback/DashboardPage') },
   { path: 'categories', lazy: () => import('@/features/categories/CategoriesPage') },
   { path: 'book', lazy: () => import('@/features/booking/BookingPage') },
   { path: 'interviews', lazy: () => import('@/features/interviews/InterviewsPage') },
   { path: 'interviews/:id', lazy: () => import('@/features/interviews/InterviewDetailPage') },
+  { path: 'interviews/:id/feedback', lazy: () => import('@/features/feedback/FeedbackDetailPage') },
   { path: 'resumes', lazy: () => import('@/features/resume/ResumePage') },
 ];
 
+const sessionRoutes = [{ path: 'interviews/:id/session', lazy: () => import('@/features/session/SessionPage') }];
 
 // Layout routes (no path) wrap their children: ProtectedRoute guards everything inside it, AppShell adds the
 // sidebar, and <Outlet /> marks where the matched child page renders. :id is a dynamic route parameter.
