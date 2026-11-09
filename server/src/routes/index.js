@@ -3,6 +3,8 @@ import authRoutes from './auth.routes.js';
 import categoryRoutes from './categories.routes.js';
 import slotRoutes from './slots.routes.js';
 import resumeRoutes from './resumes.routes.js';
+import sessionRoutes from './session.routes.js';
+import feedbackRoutes, { interviewFeedbackRoutes } from './feedbacks.routes.js';
 import interviewRoutes from './interviews.routes.js';
 
 const router = Router();
@@ -11,6 +13,9 @@ router.use('/auth', authRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/slots', slotRoutes);
 router.use('/resumes', resumeRoutes);
+router.use('/interviews', sessionRoutes);
+router.use('/interviews', interviewFeedbackRoutes);
 router.use('/interviews', interviewRoutes);
+router.use('/feedbacks', feedbackRoutes);
 
 export default router;
