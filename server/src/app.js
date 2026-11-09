@@ -7,6 +7,10 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import { env } from './config/env.js';
+import routes from './routes/index.js';
+import { generalLimiter } from './middleware/rateLimit.js';
+import { csrfGuard } from './middleware/csrfGuard.js';
+import { notFound, errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
@@ -21,6 +25,9 @@ app.use(cookieParser());
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
 
+app.use('/api', generalLimiter);
+app.use('/api', csrfGuard);
+app.use('/api', routes);
 
 // In production this server also serves the built React app (client/dist). The browser then sees ONE origin:
 // first-party cookies, no CORS, no separate static host and no SPA-rewrite rules to configure.
@@ -37,5 +44,7 @@ if (env.NODE_ENV === 'production' && existsSync(clientDist)) {
   );
 }
 
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
