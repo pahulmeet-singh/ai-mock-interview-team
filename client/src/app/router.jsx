@@ -15,6 +15,10 @@ const authRoutes = [
 
 const appRoutes = [
   { path: 'categories', lazy: () => import('@/features/categories/CategoriesPage') },
+  { path: 'book', lazy: () => import('@/features/booking/BookingPage') },
+  { path: 'interviews', lazy: () => import('@/features/interviews/InterviewsPage') },
+  { path: 'interviews/:id', lazy: () => import('@/features/interviews/InterviewDetailPage') },
+  { path: 'resumes', lazy: () => import('@/features/resume/ResumePage') },
 ];
 
 
