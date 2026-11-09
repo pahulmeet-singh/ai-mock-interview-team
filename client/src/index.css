@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens. One dark theme, tuned for long reading sessions: a deep slate-teal ground, a single amber
+   accent for the things you can act on, and three score colours that always mean the same thing. */
+@layer base {
+  :root {
+    --background: 196 34% 7%;
+    --foreground: 190 22% 92%;
+    --card: 196 30% 10%;
+    --popover: 196 32% 9%;
+    --primary: 42 94% 61%;
+    --primary-foreground: 36 70% 8%;
+    --secondary: 196 24% 16%;
+    --muted: 196 24% 13%;
+    --muted-foreground: 192 14% 66%;
+    --accent: 196 26% 18%;
+    --destructive: 6 78% 63%;
+    --destructive-foreground: 6 90% 10%;
+    --success: 158 52% 54%;
+    --border: 196 22% 18%;
+    --input: 196 22% 24%;
+    --ring: 42 94% 61%;
+    --radius: 0.875rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+  }
+
+  /* Sonner ships its own font stack; make toasts use ours. */
+  [data-sonner-toaster][data-sonner-toaster] {
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}
