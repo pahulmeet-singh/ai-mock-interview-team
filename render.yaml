@@ -1,0 +1,30 @@
+# Render Blueprint: ONE web service that builds the React app and serves it together with the API.
+# Render dashboard -> New -> Blueprint -> pick your GitHub repo. It asks for the values marked "sync: false".
+services:
+  - type: web
+    name: mockroom
+    runtime: node
+    plan: free
+    # NODE_ENV=production makes npm skip devDependencies, and Vite/Tailwind are devDependencies, hence --include=dev.
+    buildCommand: npm --prefix client ci --include=dev && npm --prefix client run build && npm --prefix server ci
+    startCommand: npm --prefix server start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: 1
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GEMINI_MOCK
+        value: "true"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SLOT_ENFORCE_WINDOW
+        value: "false"
