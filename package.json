@@ -1,0 +1,16 @@
+{
+  "name": "ai-mock-interview",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Mock Interview Platform: React (Vite) + Express + Supabase + Gemini",
+  "scripts": {
+    "setup": "npm install && npm --prefix server install && npm --prefix client install",
+    "dev": "concurrently -n api,web -c yellow,cyan \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "test": "npm --prefix server test && npm --prefix client test",
+    "build": "npm --prefix client run build",
+    "smoke": "npm --prefix server run smoke"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}
